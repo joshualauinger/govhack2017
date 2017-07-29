@@ -3,6 +3,11 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+.map {
+    cursor: pointer;
+    max-height: 100%;
+}
+
 .btn-default,
 .btn-primary,
 .btn-success,
