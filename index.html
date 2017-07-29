@@ -54,17 +54,11 @@
           <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
               <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#">Export</a></li>
+                <li><p style="margin: 0 10px 10px;">Here is some text to introduce the tool and explain the following sliders and information. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></li>
               </ul>
               <ul class="nav nav-sidebar">
-                <li><a href="">Nav item</a></li>
-                <li><a href="">Nav item again</a></li>
-                <li><a href="">One more nav</a></li>
-                <li><a href="">Another nav item</a></li>
-                <li><a href="">More navigation</a></li>
+                <li><p style="margin: 0 10px 10px;">No. of Wind Turbines</p></li>
+                <!-- Buttons -->
               </ul>
               <ul class="nav nav-sidebar">
                 <li><a href="">Nav item again</a></li>
@@ -95,7 +89,7 @@
         <script type="text/javascript">
             // Some constants for the SVG image
             var width = 960,
-            height = 1160;
+            height = 500;
 
             d3.select("body").style("background-color", "#cdc");
 
@@ -115,7 +109,7 @@
                 // Project the map without distortions that come with representing a spherical world on a flat image
                 var projection = d3.geo.conicConformal() 
                     .rotate([-132, 0]) // Rotate the ACT to align to north
-                    .center([17.2, -36]) // Center the projection over the ACT
+                    .center([17.2, -35.5]) // Center the projection over the ACT
                     .parallels([-18, -36]) // Represents australia with little distortion
                     .scale(30000) // Zoom into the ACT
                     .translate([width / 2, height / 2])
