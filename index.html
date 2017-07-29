@@ -58,7 +58,9 @@
               </ul>
               <ul class="nav nav-sidebar">
                 <li><p style="margin: 0 10px 10px;">No. of Wind Turbines</p></li>
-                <!-- Buttons -->
+                <button type="button" class="btn btn-default">-</button>
+                <p>1</p>
+                 <button type="button" class="btn btn-default">+</button>
               </ul>
               <ul class="nav nav-sidebar">
                 <li><a href="">Nav item again</a></li>
@@ -95,9 +97,6 @@
 
             var svg = d3.select("#Map").append("svg")
                 .attr("viewBox", "0 0 " + width + " " + height);
-
-                //.attr("viewBox", [0, 0, (width + margin.right + margin.left),
-                        //(height + margin.top + margin.bottom)].join(' '))
 
                 // Load the .json file that contains the boundary of the ACT
             d3.json("data/ActBoundary.json", function (error, act) {
