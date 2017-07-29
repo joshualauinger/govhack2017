@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Govhack Project 2017</title>
+        <!--<script type="text/javascript" src="d3/d3.js"></script>-->
+        <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="//d3js.org/topojson.v1.min.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var width = 960,
+                height = 1160;
+
+            var svg = d3.select("body").append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+            d3.json("data/test.json", function(error, act) {
+                if (error) return console.error(error);
+                  console.log(act);
+
+                  var subunits = topojson.feature(act, act.objects.collection);
+                  var projection = d3.geo.conicConformal() 
+                    .rotate([-132, 0])
+                    .center([17.2, -36])
+                    .parallels([-18, -36])
+                    .scale(30000)
+                    .translate([width / 2, height / 2])
+                    .precision(0.1);
+                  var path = d3.geo.path()
+                      .projection(projection);
+                  svg.append("path")
+                      .datum(subunits)
+                      .attr("d", path);
+            });
+        </script>
+    </body>
+</html>
