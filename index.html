@@ -6,6 +6,15 @@
         <!--<script type="text/javascript" src="d3/d3.js"></script>-->
         <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="//d3js.org/topojson.v1.min.js"></script>
+        <style>
+            .subunit { 
+              fill: #ddc;
+              stroke: #777;
+              stroke-dasharray: 2,2;
+              stroke-linejoin: round;
+            }
+
+        </style>
     </head>
     <body>
         <script type="text/javascript">
@@ -16,24 +25,35 @@
                 .attr("width", width)
                 .attr("height", height);
 
-            d3.json("data/test.json", function(error, act) {
+                // Load the .json file that contains the boundary of the ACT
+            d3.json("data/ActBoundary.json", function (error, act) {
                 if (error) return console.error(error);
-                  console.log(act);
+                console.log(act);
 
-                  var subunits = topojson.feature(act, act.objects.collection);
-                  var projection = d3.geo.conicConformal() 
-                    .rotate([-132, 0])
-                    .center([17.2, -36])
-                    .parallels([-18, -36])
-                    .scale(30000)
+                // Get all objects in the json file (only one though)
+                var subunits = topojson.feature(act, act.objects.collection);
+                // Project the map without distortions that come with representing a spherical world on a flat image
+                var projection = d3.geo.conicConformal() 
+                    .rotate([-132, 0]) // Rotate the ACT to align to north
+                    .center([17.2, -36]) // Center the projection over the ACT
+                    .parallels([-18, -36]) // Represents australia with little distortion
+                    .scale(30000) // Zoom into the ACT
                     .translate([width / 2, height / 2])
                     .precision(0.1);
-                  var path = d3.geo.path()
-                      .projection(projection);
-                  svg.append("path")
-                      .datum(subunits)
-                      .attr("d", path);
-            });
+                var path = d3.geo.path()
+                    .projection(projection);
+                svg.append("path") // Create an SVG image from the data
+                    .datum(subunits)
+                    .attr("d", path);
+
+                // Apply styling to the SVG
+                svg.selectAll(".collection") 
+                    .data(topojson.feature(act, act.objects.collection).features)
+                    .enter().append("path")
+                    .attr("class", function (d) { return "subunit " + d.id; }) 
+                    .attr("d", path);
+
+                });
         </script>
     </body>
 </html>
